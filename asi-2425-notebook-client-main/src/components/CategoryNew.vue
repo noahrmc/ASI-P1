@@ -1,28 +1,3 @@
-<script>
-import CategoryRepository from "@/repositories/CategoryRepository";
-
-export default {
-  data() {
-    return {
-      CategoryForm: {
-        name: null,
-      },
-    };
-  },
-  methods: {
-    async create() {
-      try {
-        const response = await CategoryRepository.save(this.CategoryForm);
-        console.log(response);
-        this.$router.push("/categories");
-      } catch (err) {
-        console.error(err);
-      }
-    },
-  },
-};
-</script>
-
 <template>
   <form class="formulario">
     <div class="mb-3">
@@ -40,6 +15,38 @@ export default {
     </div>
 </template>
 
+<script>
+import CategoryRepository from "@/repositories/CategoryRepository";
+
+export default {
+  data() {
+    return {
+      CategoryForm: {
+        name: null,
+      },
+      errorMessage: '',
+    };
+  },
+  methods: {
+    async create() {
+      if (!this.CategoryForm.name){
+
+        this.errorMessage = "El nombre de la categoría no puede estar vacío.";
+        window.alert("El nombre de la categoría no puede estar vacío.");
+        console.log(this.errorMessage);
+        return;
+      }
+      try {
+        const response = await CategoryRepository.save(this.CategoryForm);
+        console.log(response);
+        this.$router.push("/categories");
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  },
+};
+</script>
 <style scoped>
 .formulario {
   margin: 10px auto;

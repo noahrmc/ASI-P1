@@ -1,6 +1,6 @@
 <template>
   <div class="mb-3">
-    <label for="select" class="form-label">Categorías:</label>
+    <label for="select" class="form-label">Categorías :</label>
     <p></p>
     <p></p>
     <div class="mb-3">
